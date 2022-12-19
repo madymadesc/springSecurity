@@ -35,3 +35,30 @@ Nous pouvons utiliser un Spring Initializr et générer un modèle de projet. Po
     </dependency>
 </dependencies>
 ```
+
+Ajoutons un simple contrôleur REST comme suit :
+
+```
+@RestController @RequestMapping("hello")
+public class HelloRestController {
+
+    @GetMapping("user")
+    public String helloUser() {
+        return "Hello User";
+    }
+
+    @GetMapping("admin")
+    public String helloAdmin() {
+        return "Hello Admin";
+    }
+
+}
+```
+
+Après cela, si nous construisons et exécutons le projet, nous pouvons accéder aux URL suivantes dans le navigateur Web :
+```
+http://localhost:8080/hello/user renverra la chaîne Hello User.
+```
+```
+http://localhost:8080/hello/admin renverra la chaîne Hello Admin.
+```
