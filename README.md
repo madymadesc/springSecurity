@@ -23,5 +23,15 @@ L'autorité accordée fait référence à l'autorisation de l'utilisateur authen
 
 Le rôle fait référence à un groupe d'autorisations de l'utilisateur authentifié.
 
+### Création d'une application Spring de base
 
+Nous pouvons utiliser un Spring Initializr et générer un modèle de projet. Pour une application web simple, seule une dépendance du framework web Spring suffit :
   
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+```
