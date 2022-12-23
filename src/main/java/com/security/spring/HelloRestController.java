@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("hello")
 public class HelloRestController {
 
+
+    @GetMapping
+    public String home(){
+        return "Hello, World";
+    }
     @GetMapping("user")
     public String helloUser(){
-        return "Hello User";
+        return "Hello, User";
     }
 
     @GetMapping("admin")
     public String helloAdmin(){
-        return "Hello Admin";
+        return "Hello, Admin";
     }
 
 }
