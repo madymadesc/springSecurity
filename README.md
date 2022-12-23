@@ -62,3 +62,68 @@ http://localhost:8080/hello/user renverra la chaîne Hello User.
 ```
 http://localhost:8080/hello/admin renverra la chaîne Hello Admin.
 ```
+Créons la class security config
+
+```
+@EnableWebSecurity
+public class SecurityConfig{}
+```
+Configurons les roles des utilisateur 
+```
+@EnableWebSecurity
+public class SecurityConfig{
+
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers("/USER").hasRole("USER");
+                    auth.requestMatchers("/ADMIN").hasRole(("ADMIN"));
+                })
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+}
+
+```
+Configurons les accès des utilisateur
+
+```
+@EnableWebSecurity
+public class SecurityConfig{
+
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsManager(){
+        UserDetails user = User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("password")
+                .roles("USER")
+                .build();
+        UserDetails admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("password")
+                .roles("ADMIN")
+                .build();
+
+        return  new InMemoryUserDetailsManager(user, admin);
+    }
+
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers("/USER").hasRole("USER");
+                    auth.requestMatchers("/ADMIN").hasRole(("ADMIN"));
+                })
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+}
+
+```
+###  Merci !!!
